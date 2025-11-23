@@ -16,10 +16,11 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.example.services.ConverterService;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.wnameless.json.flattener.PrintMode;
 import com.github.wnameless.json.unflattener.JsonUnflattener;
+
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 
 public class Excel2JsonConverterService implements ConverterService {
 
@@ -109,7 +110,7 @@ public class Excel2JsonConverterService implements ConverterService {
         String json;
         try {
             json = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(data);
-        } catch(JsonProcessingException e) {
+        } catch(JacksonException e) {
             json = "{}";
         }
 
